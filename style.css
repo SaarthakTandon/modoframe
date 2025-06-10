@@ -1,0 +1,266 @@
+/* Global Reset and Fonts */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #0f0f0f;
+  color: #fff;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: #1a1a1a;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: #ff4c60;
+}
+
+.modoframe-logo {
+  height: 100px; /* Matches text height roughly */
+  width: auto;
+  margin-right: 10px;
+}
+
+
+nav a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ff4c60;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px 50px;
+  background: linear-gradient(to right, #1a1a1a, #2a2a2a);
+  gap: 50px;
+}
+
+.hero-content {
+  flex: 1 1 500px;
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.hero-content p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  max-width: 500px;
+  color: #cccccc;
+}
+
+.cta-button {
+  background: #ff4c60;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+  background: #e84352;
+}
+
+
+.hero-img img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+  .hero-img {
+  position: relative;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.background-wrapper {
+  position: absolute;
+  top: 50%;         /* Adjust as needed */
+  left: 70%;        /* Adjust as needed */
+  transform: translate(-50%, -50%);
+  width: 600px;     /* Adjust size */
+  height: 600px;
+  z-index: 0;
+}
+
+/* Static image - no animation */
+.centered-static {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Rotating image - only this rotates */
+.centered-rotating {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 1;
+  animation: rotateWheel 12s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes rotateWheel {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.main-img {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+  height: auto;
+}
+
+    section {
+      padding: 80px 50px;
+    }
+
+/* About, Brands, Testimonials */
+.about, .brands, .testimonials {
+  padding: 80px 50px;
+  background: #141414;
+}
+
+.about h2, .brands h2, .testimonials h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #ff4c60;
+}
+
+/* Brands Marquee */
+.brand-marquee {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background-color: #141414;
+  padding: 10px 0;
+  box-shadow: inset 0 0 10px #000;
+}
+
+.brand-track {
+  display: flex;
+  width: calc(220px * 12);
+  animation: scroll 30s linear infinite;
+}
+
+.brand-track:hover {
+  animation-play-state: paused;
+}
+
+.brand-track img {
+  height: 80px;
+  width: 200px;
+  object-fit: cover;
+  object-position: center;
+  margin: 0 2px;
+  background-color: #fff;
+  padding: 0px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.brand-track img:hover {
+  transform: scale(1.1);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Testimonials */
+.testimonials .testimonial-item {
+  background: #1f1f1f;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 10px;
+  border-left: 4px solid #ff4c60;
+}
+
+.testimonial-item p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.testimonial-item .client {
+  font-weight: 600;
+  color: #ccc;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 30px;
+  background: #1a1a1a;
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .brand-track img {
+    height: 60px;
+    width: 140px;
+    margin: 0 5px;
+    padding: 8px;
+  }
+}
