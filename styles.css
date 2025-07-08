@@ -55,6 +55,55 @@ nav a {
 nav a:hover {
   color: #ff4c60;
 }
+/* ============ RESPONSIVE HEADER ============ */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 30px;
+  }
+
+  .logo {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .modoframe-logo {
+    height: 60px;
+    margin-right: 8px;
+  }
+
+  nav {
+    width: 100%;
+    justify-content: space-around;
+    padding-top: 10px;
+    border-top: 1px solid #2a2a2a;
+    gap: 15px;
+  }
+
+  nav a {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 15px 20px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  nav {
+    gap: 10px;
+    justify-content: space-between;
+  }
+
+  nav a {
+    font-size: 14px;
+  }
+}
 
 /* ================= HERO ================= */
 .hero {
