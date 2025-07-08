@@ -78,7 +78,7 @@ nav a:hover {
     justify-content: space-around;
     padding-top: 10px;
     border-top: 1px solid #2a2a2a;
-    gap: 15px;
+    gap: 5px;
   }
 
   nav a {
@@ -88,7 +88,7 @@ nav a:hover {
 
 @media (max-width: 480px) {
   header {
-    padding: 15px 20px;
+    padding: 5px 20px;
   }
 
   .logo {
