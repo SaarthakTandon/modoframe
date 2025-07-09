@@ -722,3 +722,30 @@ button:hover {
     font-size: 14px;
   }
 }
+/* horizontal scroll*/
+.carousel-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carousel-row::-webkit-scrollbar {
+  display: none; /* hide scrollbar */
+}
+
+.carousel-row img {
+  width: 200px;
+  height: auto;
+  object-fit: cover;
+  scroll-snap-align: start;
+  border-radius: 8px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.carousel-row img:hover {
+  transform: scale(1.05);
+}
