@@ -3,18 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact | ModoFrame</title>
+  <title>Portfolio | ModoFrame</title>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #111;
+      color: white;
+    }
+.carousel-grid {
+  column-count: 4;
+  column-gap: 15px;
+  padding: 20px;
+}
+
+@media (max-width: 1200px) {
+  .carousel-grid {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 900px) {
+  .carousel-grid {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel-grid {
+    column-count: 1;
+  }
+}
+
+.carousel-grid img {
+  width: 100%;
+  display: block;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  break-inside: avoid;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.carousel-grid img:hover {
+  transform: scale(1.03);
+}
+
+
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      display: none;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 10px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+  </style>
 </head>
 <body>
   <header>
     <div class="logo">
-<img src="/modoframe/images/pinklogo.png" />
+      <img src="images/pinklogo.png" alt="ModoFrame Logo" class="modoframe-logo" />
       <span class="logo-text">ModoFrame</span>
     </div>
     <nav>
@@ -32,7 +103,7 @@
 
   <div class="section" id="photos-section">
     <h2>Photos</h2>
-    <div id="carousel-container"></div>
+    <div id="carousel-container" class="carousel-grid"></div>
   </div>
 
   <div class="section" id="shorts-section">
@@ -45,16 +116,18 @@
     <div class="video-grid" id="youtube-container"></div>
   </div>
 
+  <!-- Lightbox viewer -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Full Size" id="lightbox-img" />
+  </div>
+
   <script>
     const totalImages = 80;
-    const imageFormat = 'webp';
+    const imagesToShow = 40;
     const imageFolder = 'portfolio/photos/';
-    const imageNames = Array.from({ length: totalImages }, (_, i) => `${i + 1}.${imageFormat}`);
+    const imageFormat = 'jpg';
 
-    const rotatedImages = [
-      '43.webp', '44.webp', '45.webp', '47.webp', '48.webp',
-      ...Array.from({ length: 21 }, (_, i) => `${i + 57}.webp`)
-    ];
+    const imageNames = Array.from({ length: totalImages }, (_, i) => `${i + 1}.${imageFormat}`);
 
     function shuffle(arr) {
       for (let i = arr.length - 1; i > 0; i--) {
@@ -64,35 +137,33 @@
       return arr;
     }
 
-    function createCarouselRow(images, index) {
-  const row = document.createElement('div');
-  row.className = 'carousel-row';
-
-  images.forEach(imgName => {
-    const img = document.createElement('img');
-    img.src = `${imageFolder}${imgName}`;
-    img.alt = imgName;
-    img.loading = 'lazy';
-    img.onerror = () => img.remove();
-    if (rotatedImages.includes(imgName)) {
-      img.style.transform = 'rotate(-90deg)';
-    }
-    row.appendChild(img);
-  });
-
-  return row;
-}
-
-    const shuffledImages = shuffle(imageNames);
-    const carouselContainer = document.getElementById('carousel-container');
-
-    for (let i = 0; i < 4; i++) {
-      const chunk = shuffledImages.slice(i * 20, (i + 1) * 20);
-      const row = createCarouselRow(chunk, i);
-      carouselContainer.appendChild(row);
+    function createGallery(images) {
+      const container = document.getElementById('carousel-container');
+      images.forEach(imgName => {
+        const img = document.createElement('img');
+        img.src = `${imageFolder}${imgName}`;
+        img.alt = imgName;
+        img.loading = 'lazy';
+        img.onerror = () => img.remove(); // skip broken/missing images
+        img.onclick = () => openLightbox(img.src);
+        container.appendChild(img);
+      });
     }
 
-    const shorts = [
+    function openLightbox(src) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = src;
+      lightbox.classList.add('active');
+    }
+
+    document.getElementById('lightbox').onclick = function () {
+      this.classList.remove('active');
+    };
+
+    createGallery(shuffle([...imageNames]).slice(0, imagesToShow));
+
+    const shorts = shuffle([
       "https://youtu.be/cJI8ufeUuVY",
       "https://youtu.be/sMEbipe8m0o",
       "https://youtu.be/kChfzoF0tB4",
@@ -107,7 +178,7 @@
       "https://youtu.be/yoNFAojJ5OQ",
       "https://youtu.be/gSviG6tqEBk",
       "https://youtu.be/EtqYQheMbzY"
-    ];
+    ]).slice(0, 8);
 
     const youtube = [
       "https://youtu.be/1iSc4g7WrC4",
@@ -119,7 +190,6 @@
       const container = document.createElement('div');
       container.className = 'video-wrapper';
 
-      // Extract video ID
       const videoId = url.split('/').pop();
       const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
@@ -135,8 +205,7 @@
         const iframe = document.createElement('iframe');
         iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
         iframe.frameBorder = "0";
-        iframe.allow =
-          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
         iframe.allowFullscreen = true;
         iframe.className = 'embedded-iframe';
         container.innerHTML = '';
