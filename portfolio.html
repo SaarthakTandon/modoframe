@@ -65,30 +65,23 @@
     }
 
     function createCarouselRow(images, index) {
-      const row = document.createElement('div');
-      row.className = 'carousel-row';
+  const row = document.createElement('div');
+  row.className = 'carousel-row';
 
-      const track = document.createElement('div');
-      track.className = 'carousel-track';
-
-      const visibleImages = images.slice(0, 10);
-      const duplicated = [...visibleImages, ...visibleImages];
-
-      duplicated.forEach(imgName => {
-        const img = document.createElement('img');
-        img.src = `${imageFolder}${imgName}`;
-        img.alt = imgName;
-        img.loading = 'lazy';
-        img.onerror = () => img.remove();
-        if (rotatedImages.includes(imgName)) {
-          img.style.transform = 'rotate(-90deg)';
-        }
-        track.appendChild(img);
-      });
-
-      row.appendChild(track);
-      return row;
+  images.forEach(imgName => {
+    const img = document.createElement('img');
+    img.src = `${imageFolder}${imgName}`;
+    img.alt = imgName;
+    img.loading = 'lazy';
+    img.onerror = () => img.remove();
+    if (rotatedImages.includes(imgName)) {
+      img.style.transform = 'rotate(-90deg)';
     }
+    row.appendChild(img);
+  });
+
+  return row;
+}
 
     const shuffledImages = shuffle(imageNames);
     const carouselContainer = document.getElementById('carousel-container');
