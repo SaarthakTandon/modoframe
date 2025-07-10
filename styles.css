@@ -428,7 +428,7 @@ h2 {
   }
 
   .nav-btn {
-    width: 20%;         /* Makes the button wide but with some padding on the sides */
+    width: 28%;         /* Makes the button wide but with some padding on the sides */
     max-width: 300px;   /* Prevents it from being too wide on tablets */
     font-size: 14px;    /* Adjust font size */
     padding: 12px 20px; /* Adjust padding for touch comfort */
