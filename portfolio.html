@@ -6,7 +6,10 @@
   <title>Portfolio | ModoFrame</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap"
+    rel="stylesheet"
+  />
 
   <!-- Font Awesome -->
   <link
@@ -17,6 +20,10 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
@@ -25,95 +32,146 @@
       color: white;
     }
 
-    /* Pinned images displayed above shuffled photos */
-    .pinned-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      padding: 20px 20px 0;
+    
+
+    /* =========================
+       TOP CATEGORY BUTTONS
+    ========================== */
+
+    .btn-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      padding: 20px;
     }
 
-    .pinned-image-wrapper {
+    .nav-btn {
+      width: auto;
+      min-width: 120px;
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 24px;
+      background: #242424;
+      color: white;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active {
+      background: #ff4964;
+      transform: translateY(-2px);
+    }
+
+    /* =========================
+       MARQUEE PHOTO CAROUSEL
+    ========================== */
+
+    .marquee-section {
+      overflow: hidden;
+      padding: 20px 0 30px;
+    }
+
+    .marquee-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 18px;
+      animation: marquee-scroll 28s linear infinite;
+      padding-left: 18px;
+    }
+
+    .marquee-container:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    .marquee-item {
+      width: 390px;
+      height: 480px;
+      flex-shrink: 0;
       position: relative;
       overflow: hidden;
-      border-radius: 10px;
+      border-radius: 14px;
       background: #222;
     }
 
-    .pinned-image-wrapper img {
+    .marquee-item img {
       width: 100%;
-      height: 420px;
-      object-fit: cover;
+      height: 100%;
       display: block;
+      object-fit: cover;
       cursor: pointer;
-      transition: transform 0.2s ease-in-out;
+      transition: transform 0.3s ease;
     }
 
-    .pinned-image-wrapper img:hover {
-      transform: scale(1.03);
+    .marquee-item:hover img {
+      transform: scale(1.04);
     }
 
-    .pinned-label {
+    .featured-label {
       position: absolute;
-      top: 12px;
-      left: 12px;
+      left: 14px;
+      bottom: 14px;
       z-index: 2;
-      padding: 6px 12px;
+      padding: 7px 13px;
       border-radius: 20px;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.72);
       color: white;
       font-size: 13px;
       font-weight: 600;
       pointer-events: none;
     }
 
-    .pinned-label i {
-      margin-right: 5px;
-    }
-
-    @media (max-width: 900px) {
-      .pinned-grid {
-        grid-template-columns: repeat(2, 1fr);
+    @keyframes marquee-scroll {
+      from {
+        transform: translateX(0);
       }
 
-      .pinned-image-wrapper img {
-        height: 350px;
+      to {
+        transform: translateX(calc(-50% - 9px));
       }
     }
 
-    @media (max-width: 600px) {
-      .pinned-grid {
-        grid-template-columns: 1fr;
-      }
+    /* =========================
+       SECTION STYLING
+    ========================== */
 
-      .pinned-image-wrapper img {
-        height: auto;
-        max-height: 500px;
-      }
+    .section {
+      padding-top: 10px;
     }
+
+    .section h2 {
+      text-align: center;
+      margin: 20px 0 5px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      margin: 0 auto 15px;
+      padding: 0 20px;
+      color: #bdbdbd;
+      font-size: 14px;
+    }
+
+    /* =========================
+       PHOTO GALLERY
+    ========================== */
 
     .carousel-grid {
       column-count: 4;
       column-gap: 15px;
       padding: 20px;
-    }
-
-    @media (max-width: 1200px) {
-      .carousel-grid {
-        column-count: 3;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .carousel-grid {
-        column-count: 2;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .carousel-grid {
-        column-count: 2;
-      }
     }
 
     .carousel-grid img {
@@ -130,27 +188,257 @@
       transform: scale(1.03);
     }
 
+    /* =========================
+       VIDEO GRIDS
+    ========================== */
+
+    .video-grid {
+      display: grid;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .featured-video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    #shorts-container {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    #youtube-container {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #000;
+      cursor: pointer;
+    }
+
+    .video-wrapper.short-video {
+      aspect-ratio: 9 / 16;
+      max-width: 340px;
+      width: 100%;
+      justify-self: center;
+    }
+
+    .video-wrapper.long-video {
+      width: 100% !important;
+      max-width: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+      aspect-ratio: 16 / 9 !important;
+      padding: 0 !important;
+      padding-bottom: 0 !important;
+      justify-self: stretch !important;
+    }
+
+    .video-wrapper.long-video .thumbnail,
+    .video-wrapper.long-video .embedded-iframe {
+      position: static !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+    }
+
+    .video-wrapper .thumbnail,
+    .video-wrapper .embedded-iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+    }
+
+    .video-wrapper .thumbnail {
+      object-fit: cover;
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 68px;
+      height: 48px;
+      transform: translate(-50%, -50%);
+      border-radius: 12px;
+      background: rgba(255, 0, 0, 0.9);
+      pointer-events: none;
+    }
+
+    .play-button::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 52%;
+      transform: translate(-50%, -50%);
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 16px solid white;
+    }
+
+    /* =========================
+       EXPANDED CONTENT SECTIONS
+    ========================== */
+
+    .expandable-section {
+      display: none;
+      scroll-margin-top: 30px;
+      animation: reveal-section 0.35s ease;
+    }
+
+    .expandable-section.active {
+      display: block;
+    }
+
+    @keyframes reveal-section {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       LIGHTBOX
+    ========================== */
+
     .lightbox {
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.88);
       justify-content: center;
       align-items: center;
       z-index: 1000;
       display: none;
+      cursor: pointer;
     }
 
     .lightbox img {
       max-width: 90vw;
       max-height: 90vh;
       border-radius: 10px;
+      object-fit: contain;
     }
 
     .lightbox.active {
       display: flex;
+    }
+
+    /* =========================
+       RESPONSIVE DESIGN
+    ========================== */
+
+    @media (max-width: 1200px) {
+      .marquee-item {
+        width: 330px;
+        height: 420px;
+      }
+
+      .carousel-grid {
+        column-count: 3;
+      }
+
+      #shorts-container {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      #youtube-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .marquee-item {
+        width: 290px;
+        height: 380px;
+      }
+
+      .featured-video-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .carousel-grid {
+        column-count: 2;
+      }
+
+      #shorts-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #youtube-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .btn-nav {
+        gap: 8px;
+        padding: 15px 10px;
+      }
+
+      .nav-btn {
+        min-width: 95px;
+        padding: 9px 14px;
+        font-size: 14px;
+      }
+
+      .marquee-track {
+        gap: 12px;
+        padding-left: 12px;
+        animation-duration: 22s;
+      }
+
+      .marquee-item {
+        width: 250px;
+        height: 330px;
+      }
+
+      .featured-video-grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+        gap: 15px;
+      }
+
+      .carousel-grid {
+        column-count: 2;
+        column-gap: 10px;
+        padding: 10px;
+      }
+
+      .carousel-grid img {
+        margin-bottom: 10px;
+      }
+
+      .video-grid {
+        padding: 10px;
+        gap: 12px;
+      }
+
+      #shorts-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #youtube-container {
+        grid-template-columns: 1fr;
+      }
+
+      .play-button {
+        width: 56px;
+        height: 40px;
+      }
     }
   </style>
 </head>
@@ -173,51 +461,79 @@
     </nav>
   </header>
 
+  <!-- Top Filter Buttons -->
   <div class="btn-nav">
-    <a href="#photos-section" class="nav-btn">Photos</a>
-    <a href="#shorts-section" class="nav-btn">Shorts</a>
-    <a href="#youtube-section" class="nav-btn">YouTube</a>
+    <button class="nav-btn" data-target="photos-section">Photos</button>
+    <button class="nav-btn" data-target="shorts-section">Shorts</button>
+    <button class="nav-btn" data-target="youtube-section">YouTube</button>
   </div>
 
-  <div class="section" id="photos-section">
-    <h2>Photos</h2>
+  <!-- Featured Marquee Photos -->
+  <section class="section marquee-section">
+    <h2>Featured Photography</h2>
+    <p class="section-subtitle">
+      A moving selection of featured work. Hover to pause.
+    </p>
 
-    <!-- Three pinned images will appear here -->
-    <div id="pinned-container" class="pinned-grid"></div>
+    <div class="marquee-container">
+      <div id="marquee-track" class="marquee-track"></div>
+    </div>
+  </section>
 
-    <!-- Shuffled images will appear here -->
+  <!-- Featured Shorts -->
+  <section class="section">
+    <h2>Featured Shorts</h2>
+    <div class="featured-video-grid" id="featured-shorts-container"></div>
+  </section>
+
+  <!-- Featured Long Videos -->
+  <section class="section">
+    <h2>Featured YouTube Videos</h2>
+    <div class="featured-video-grid" id="featured-youtube-container"></div>
+  </section>
+
+  <!-- Remaining Photos -->
+  <section class="section expandable-section" id="photos-section">
+    <h2>Photography</h2>
     <div id="carousel-container" class="carousel-grid"></div>
-  </div>
+  </section>
 
-  <div class="section" id="shorts-section">
-    <h2>Shorts</h2>
+  <!-- Remaining Shorts -->
+  <section class="section expandable-section" id="shorts-section">
+    <h2>All Shorts</h2>
     <div class="video-grid" id="shorts-container"></div>
-  </div>
+  </section>
 
-  <div class="section" id="youtube-section">
-    <h2>YouTube Videos</h2>
+  <!-- Remaining Long YouTube Videos -->
+  <section class="section expandable-section" id="youtube-section">
+    <h2>All YouTube Videos</h2>
     <div class="video-grid" id="youtube-container"></div>
-  </div>
+  </section>
 
-  <!-- Lightbox viewer -->
+  <!-- Lightbox Viewer -->
   <div class="lightbox" id="lightbox">
     <img src="" alt="Full Size" id="lightbox-img" />
   </div>
 
   <script>
     /*
-      PHOTO SETTINGS
-      Change the three numbers below to choose pinned images.
-      Example: [4, 35, 110]
+      FEATURED MARQUEE PHOTO SETTINGS
+
+      Change these six numbers whenever you want
+      to replace the featured carousel photos.
     */
-    const pinnedImageNumbers = [103, 11, 104];
+    const marqueeImageNumbers = [103, 11, 104, 35, 52, 110];
 
     /*
-      Total photos are now 115.
-      Change imagesToShow if you want more shuffled photos displayed.
+      Total number of photos available.
     */
     const totalImages = 115;
+
+    /*
+      Number of shuffled photos shown after clicking Photos.
+    */
     const imagesToShow = 40;
+
     const imageFolder = 'portfolio/photos/';
     const imageFormat = 'jpg';
 
@@ -236,43 +552,47 @@
     }
 
     /*
-      Creates the three pinned images.
-    */
-    function createPinnedGallery(imageNumbers) {
-      const container = document.getElementById('pinned-container');
+      Creates the continuously moving photo carousel.
 
-      imageNumbers.slice(0, 3).forEach(imageNumber => {
+      The image list is duplicated so the animation loops smoothly.
+    */
+    function createMarqueeGallery(imageNumbers) {
+      const track = document.getElementById('marquee-track');
+      const repeatedImages = [...imageNumbers, ...imageNumbers];
+
+      repeatedImages.forEach((imageNumber, index) => {
         if (imageNumber < 1 || imageNumber > totalImages) {
-          console.warn(`Pinned image ${imageNumber} is outside the available range.`);
           return;
         }
 
         const wrapper = document.createElement('div');
-        wrapper.className = 'pinned-image-wrapper';
+        wrapper.className = 'marquee-item';
 
         const img = document.createElement('img');
         img.src = `${imageFolder}${imageNumber}.${imageFormat}`;
-        img.alt = `Pinned portfolio image ${imageNumber}`;
-        img.loading = 'eager';
+        img.alt = `Featured portfolio image ${imageNumber}`;
+        img.loading = index < 6 ? 'eager' : 'lazy';
 
         img.onerror = () => {
           wrapper.remove();
         };
 
-        img.onclick = () => openLightbox(img.src);
+        img.onclick = () => {
+          openLightbox(img.src);
+        };
 
         const label = document.createElement('div');
-        label.className = 'pinned-label';
-        label.innerHTML = '<i class="fas fa-thumbtack"></i> Pinned';
+        label.className = 'featured-label';
+        label.innerHTML = '<i class="fas fa-star"></i> Featured';
 
         wrapper.appendChild(img);
         wrapper.appendChild(label);
-        container.appendChild(wrapper);
+        track.appendChild(wrapper);
       });
     }
 
     /*
-      Creates the shuffled gallery.
+      Creates the shuffled gallery shown after clicking Photos.
     */
     function createGallery(images) {
       const container = document.getElementById('carousel-container');
@@ -284,9 +604,13 @@
         img.alt = `Portfolio image ${imgName}`;
         img.loading = 'lazy';
 
-        img.onerror = () => img.remove();
+        img.onerror = () => {
+          img.remove();
+        };
 
-        img.onclick = () => openLightbox(img.src);
+        img.onclick = () => {
+          openLightbox(img.src);
+        };
 
         container.appendChild(img);
       });
@@ -304,61 +628,113 @@
       this.classList.remove('active');
     };
 
-    /*
-      Convert pinned image numbers into filenames.
-      Example: 25 becomes 25.jpg
-    */
-    const pinnedImageNames = pinnedImageNumbers.map(
-      imageNumber => `${imageNumber}.${imageFormat}`
-    );
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        document.getElementById('lightbox').classList.remove('active');
+      }
+    });
+
+    createMarqueeGallery(marqueeImageNumbers);
 
     /*
-      Remove pinned images from shuffled images so they are not repeated.
+      The full Photography section uses the original behaviour:
+      40 photos are randomly selected and shuffled from all 115 images.
     */
-    const shuffleEligibleImages = imageNames.filter(
-      imgName => !pinnedImageNames.includes(imgName)
-    );
-
-    createPinnedGallery(pinnedImageNumbers);
-
     createGallery(
-      shuffle([...shuffleEligibleImages]).slice(0, imagesToShow)
+      shuffle([...imageNames]).slice(0, imagesToShow)
     );
 
-    const shorts = shuffle([
-      "https://youtu.be/cJI8ufeUuVY",
-      "https://youtu.be/sMEbipe8m0o",
-      "https://youtu.be/kChfzoF0tB4",
-      "https://youtu.be/GwCnpzade58",
-      "https://youtu.be/FcDLEEc2qv4",
-      "https://youtu.be/mv7wDpLtidM",
-      "https://youtu.be/tb34xMsddyA",
-      "https://youtu.be/PM4blu1eDos",
-      "https://youtu.be/M0nZ5Zxj_4Q",
-      "https://youtu.be/ivoUvm579SE",
-      "https://youtu.be/biBjxzPmqoE",
-      "https://youtu.be/yoNFAojJ5OQ",
-      "https://youtu.be/gSviG6tqEBk",
-      "https://youtu.be/EtqYQheMbzY"
-    ]).slice(0, 8);
-
-    const youtube = [
-      "https://youtu.be/1iSc4g7WrC4",
-      "https://youtu.be/u54MY3jU0kY",
-      "https://youtu.be/9Wc-H8ePWP4"
+    /*
+      ALL SHORTS LINKS
+    */
+    const allShorts = [
+      'https://youtu.be/cJI8ufeUuVY',
+      'https://youtu.be/sMEbipe8m0o',
+      'https://youtu.be/kChfzoF0tB4',
+      'https://youtu.be/GwCnpzade58',
+      'https://youtu.be/FcDLEEc2qv4',
+      'https://youtu.be/mv7wDpLtidM',
+      'https://youtu.be/tb34xMsddyA',
+      'https://youtu.be/PM4blu1eDos',
+      'https://youtu.be/M0nZ5Zxj_4Q',
+      'https://youtu.be/ivoUvm579SE',
+      'https://youtu.be/biBjxzPmqoE',
+      'https://youtu.be/yoNFAojJ5OQ',
+      'https://youtu.be/gSviG6tqEBk',
+      'https://youtu.be/EtqYQheMbzY'
     ];
 
-    function createYouTubeEmbed(url) {
-      const container = document.createElement('div');
-      container.className = 'video-wrapper';
+    /*
+      ALL LONG YOUTUBE VIDEO LINKS
+    */
+    const allYouTubeVideos = [
+      'https://youtu.be/uwlYdGivFJg?si=ql1HbSv6jkufRRU0',
+      'https://youtu.be/Cbk_scjX3oo?si=NA6oSRn0mX58HCSd',
+      'https://youtu.be/JHETotLUx3E?si=cBC4PQyxzjBR-0i_',
+      'https://youtu.be/Y7Z2kYaiI40?si=ZorO-WounzU6NxoH',
+      'https://youtu.be/1iSc4g7WrC4',
+      'https://youtu.be/u54MY3jU0kY',
+      'https://youtu.be/9Wc-H8ePWP4'
+    ];
 
-      const videoId = url.split('/').pop();
-      const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    /*
+      The first three items appear in the featured area.
+
+      The complete Shorts and YouTube arrays are also displayed
+      in their full sections after the relevant top button is clicked.
+    */
+    const featuredShorts = allShorts.slice(0, 3);
+    const featuredYouTubeVideos = allYouTubeVideos.slice(0, 3);
+
+    function getYouTubeVideoId(url) {
+      try {
+        const parsedUrl = new URL(url);
+
+        if (parsedUrl.hostname.includes('youtu.be')) {
+          return parsedUrl.pathname.replace('/', '');
+        }
+
+        if (parsedUrl.hostname.includes('youtube.com')) {
+          if (parsedUrl.pathname.includes('/shorts/')) {
+            return parsedUrl.pathname.split('/shorts/')[1].split('/')[0];
+          }
+
+          if (parsedUrl.pathname.includes('/embed/')) {
+            return parsedUrl.pathname.split('/embed/')[1].split('/')[0];
+          }
+
+          return parsedUrl.searchParams.get('v');
+        }
+      } catch (error) {
+        console.error('Invalid YouTube URL:', url);
+      }
+
+      return null;
+    }
+
+    function createYouTubeEmbed(url, videoType = 'long') {
+      const videoId = getYouTubeVideoId(url);
+
+      if (!videoId) {
+        console.warn(`Could not find video ID for ${url}`);
+        return null;
+      }
+
+      const container = document.createElement('div');
+
+      container.className =
+        videoType === 'short'
+          ? 'video-wrapper short-video'
+          : 'video-wrapper long-video';
 
       const thumbnail = document.createElement('img');
-      thumbnail.src = thumbnailUrl;
-      thumbnail.alt = "YouTube Video Thumbnail";
+      thumbnail.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+      thumbnail.alt =
+        videoType === 'short'
+          ? 'YouTube Short Thumbnail'
+          : 'YouTube Video Thumbnail';
       thumbnail.className = 'thumbnail';
+      thumbnail.loading = 'lazy';
 
       const playBtn = document.createElement('div');
       playBtn.className = 'play-button';
@@ -366,10 +742,18 @@
       container.onclick = () => {
         const iframe = document.createElement('iframe');
 
-        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
-        iframe.frameBorder = "0";
+        iframe.src =
+          `https://www.youtube.com/embed/${videoId}` +
+          '?autoplay=1&rel=0&modestbranding=1';
+
+        iframe.title =
+          videoType === 'short'
+            ? 'YouTube Short'
+            : 'YouTube Video';
+
         iframe.allow =
-          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+
         iframe.allowFullscreen = true;
         iframe.className = 'embedded-iframe';
 
@@ -383,17 +767,82 @@
       return container;
     }
 
-    const shortsContainer = document.getElementById('shorts-container');
+    function addVideosToContainer(urls, containerId, videoType) {
+      const container = document.getElementById(containerId);
 
-    shorts.forEach(url =>
-      shortsContainer.appendChild(createYouTubeEmbed(url))
+      urls.forEach(url => {
+        const videoElement = createYouTubeEmbed(url, videoType);
+
+        if (videoElement) {
+          container.appendChild(videoElement);
+        }
+      });
+    }
+
+    addVideosToContainer(
+      featuredShorts,
+      'featured-shorts-container',
+      'short'
     );
 
-    const youtubeContainer = document.getElementById('youtube-container');
-
-    youtube.forEach(url =>
-      youtubeContainer.appendChild(createYouTubeEmbed(url))
+    addVideosToContainer(
+      featuredYouTubeVideos,
+      'featured-youtube-container',
+      'long'
     );
+
+    addVideosToContainer(
+      allShorts,
+      'shorts-container',
+      'short'
+    );
+
+    addVideosToContainer(
+      allYouTubeVideos,
+      'youtube-container',
+      'long'
+    );
+
+    /*
+      Navigation button behaviour.
+
+      Clicking Photos, Shorts, or YouTube:
+      1. Keeps all featured content at the top unchanged.
+      2. Hides any previously opened full category section.
+      3. Opens the selected full category below the featured content.
+      4. Scrolls smoothly to that section.
+    */
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const expandableSections =
+      document.querySelectorAll('.expandable-section');
+
+    navButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.dataset.target;
+        const targetSection = document.getElementById(targetId);
+        const isAlreadyOpen = targetSection.classList.contains('active');
+
+        expandableSections.forEach(section => {
+          section.classList.remove('active');
+        });
+
+        navButtons.forEach(navButton => {
+          navButton.classList.remove('active');
+        });
+
+        if (!isAlreadyOpen) {
+          targetSection.classList.add('active');
+          button.classList.add('active');
+
+          requestAnimationFrame(() => {
+            targetSection.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          });
+        }
+      });
+    });
   </script>
 </body>
 </html>
