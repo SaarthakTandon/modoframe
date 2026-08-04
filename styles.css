@@ -749,3 +749,114 @@ button:hover {
 .carousel-row img:hover {
   transform: scale(1.05);
 }
+/* Force Shorts to remain vertical */
+#shorts-container .video-wrapper.short-video {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  padding-bottom: 0 !important;
+  aspect-ratio: 9 / 16 !important;
+  overflow: hidden !important;
+}
+
+/* Force long YouTube videos to 16:9 */
+#youtube-container .video-wrapper.long-video {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  padding-bottom: 0 !important;
+  aspect-ratio: 16 / 9 !important;
+  overflow: hidden !important;
+}
+
+/* Fill the correct container shape */
+#shorts-container .video-wrapper img,
+#shorts-container .video-wrapper iframe,
+#youtube-container .video-wrapper img,
+#youtube-container .video-wrapper iframe {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  border: 0 !important;
+}
+
+/* Long-video grid */
+#youtube-container {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+  align-items: start !important;
+}
+
+/* Shorts grid */
+#shorts-container {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+  align-items: start !important;
+}
+
+@media (max-width: 900px) {
+  #youtube-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  #shorts-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  #youtube-container {
+    grid-template-columns: 1fr !important;
+  }
+
+  #shorts-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Larger long videos with smaller gaps */
+#youtube-container {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+
+  width: calc(100% - 40px) !important;
+  max-width: 1700px !important;
+
+  margin: 0 auto !important;
+  padding: 20px !important;
+
+  justify-content: initial !important;
+  justify-items: stretch !important;
+  align-items: start !important;
+}
+
+#youtube-container .video-wrapper.long-video {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+
+  aspect-ratio: 16 / 9 !important;
+}
+
+.nav-btn {
+  width: auto;
+  min-width: 120px;
+}
+#featured-youtube-container .video-wrapper.long-video {
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+  aspect-ratio: 16 / 9 !important;
+  padding: 0 !important;
+  padding-bottom: 0 !important;
+}
